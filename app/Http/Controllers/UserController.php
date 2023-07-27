@@ -121,6 +121,23 @@ class UserController extends Controller
             ]);
         }
     }
+    function getAllPosts()  {
+        try {
+            $posts = Post::with(['likes.user'])->get();
+            $posts->each(function ($post) {
+                $post->total_likes = $post->likes->count();
+            });
+            return response()->json([
+                'status' => 200,
+                'data' => $posts
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 500,
+                'message' => $th->getMessage()
+            ]);
+        }
+    }
     function unlikePostOrComment(Request $request)  {
         try {
             $type = $request->type;

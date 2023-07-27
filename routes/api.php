@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('/post',[UserController::class,'createPost']);
     Route::post('/comment',[UserController::class,'createComment']);
     Route::post('like-post-comments',[UserController::class,'likePostComment']);
+    Route::get('/all-posts',[UserController::class,'getAllPosts']);
     Route::get('/posts/{id}',[UserController::class,'getPostsWithLikeComments']); 
     Route::post('/unlike-post-comments',[UserController::class,'unlikePostOrComment']);
 });
