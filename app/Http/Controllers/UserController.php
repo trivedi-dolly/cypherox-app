@@ -110,9 +110,6 @@ class UserController extends Controller
             foreach ($posts->comments as $comment) {
                 $comment->total_likes = $comment->likes->count();
             }
-            $posts->each(function ($post) {
-                $post->total_post_likes = $post->likes->count();
-            });
             return response()->json([
                 'status' => 200,
                 'data' => $posts
